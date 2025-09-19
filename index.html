@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - Movie Tickets & Web Series</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+  <header>
+  <div class="logo">🎥 CineStream</div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for Movies, Series and More">
+  </div>
+   <!-- Hamburger -->
+    <div class="hamburger" id="hamburgerBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="watch.html">Watch</a>
+    <a href="bookings.html">Bookings</a>
+  </div>
+  <div class="header-right" id="headerRight">
+    <div class="watchlist">
+      <a href="payments.html">💸 <span class="watchlist-count">0</span></a>
+    </div>
+    <div class="profile">
+      <img src="profile.gif" alt="Profile" class="profile-img">
+      <div class="profile-dropdown" id="profileDropdown"></div>
+    </div>
+  </div>
+  </header>
+  <section class="hero">
+    <video autoplay muted loop>
+      <source src="hero-trailer.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+      <h1>Stream & Book Your Favorites</h1>
+      <p>Unlimited Movies, Web Series, and Ticket Bookings</p>
+      <button onclick="window.location.href='movies.html'">Explore Now</button>
+    </div>
+  </section>
+  <section class="featured">
+    <h2>Featured Movies & Series</h2>
+    <div class="content-grid">
+      <div class="content-card">
+        <img src="1.png" alt="QUANTUM AIVIDE">
+        <h3>QUANTUM AIVIDE</h3>
+        <div class="price">Ticket: ₹250</div>
+        <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+        <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+      </div>
+      <div class="content-card">
+        <img src="2.png" alt="WHISPER OF THE FORGOTTEN STAR">
+        <h3>WHISPER OF THE FORGOTTEN STAR</h3>
+        <div class="price">Watch Free</div>
+        <div class="reviews">⭐⭐⭐⭐⭐ (450 reviews)</div>
+        <button onclick="watchNow('s1')">Watch Now</button>
+      </div>
+      <div class="content-card">
+        <img src="3.png" alt="THE MIDNIGHT ALLY">
+        <h3>THE MIDNIGHT ALLY</h3>
+        <div class="price">Ticket: ₹200</div>
+        <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+        <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+      </div>
+      <div class="content-card">
+        <img src="4.png" alt="THE EMERALD CITY">
+        <h3>THE EMERALD CITY</h3>
+        <div class="price">Watch Free</div>
+        <div class="reviews">⭐⭐⭐⭐⭐ (300 reviews)</div>
+        <button onclick="watchNow('s2')">Watch Now</button>
+      </div>
+      <div class="content-card">
+        <img src="5.png" alt="LOVE AT FIRST BYTE">
+        <h3>LOVE AT FIRST BYTE</h3>
+        <div class="price">Ticket: ₹300</div>
+        <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+        <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+      </div>
+      <div class="content-card">
+        <img src="6.png" alt="THE GILDED CAGE">
+        <h3>THE GILDED CAGE</h3>
+        <div class="price">Watch Free</div>
+        <div class="reviews">⭐⭐⭐⭐⭐ (400 reviews)</div>
+        <button onclick="watchNow('s3')">Watch Now</button>
+      </div>
+      <div class="content-card">
+        <img src="7.png" alt="THE WHISPERING WOODS">
+        <h3>THE WHISPERING WOODS</h3>
+        <div class="price">Ticket: ₹280</div>
+        <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+        <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+      </div>
+      <div class="content-card">
+        <img src="8.png" alt="UNTAMED BEAUTY">
+        <h3>UNTAMED BEAUTY</h3>
+        <div class="price">Watch Free</div>
+        <div class="reviews">⭐⭐⭐⭐ (250 reviews)</div>
+        <button onclick="watchNow('s4')">Watch Now</button>
+      </div>
+    
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <p>&copy; 2025 CineStream. All rights reserved.</p>
+  </footer>
+ 
+<script src="script.js"></script>
+</body>
+</html>
