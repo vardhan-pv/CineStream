@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - My Account</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #1c1c1c;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("bg.png") no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(0.7px) brightness(0.5);
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            background: linear-gradient(90deg, #000, #2a0000);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e50914;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 300px;
+            flex-grow: 0.5;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border: none;
+            border-radius: 25px;
+            background: #333;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .search-bar input:focus {
+            background: #444;
+        }
+
+        .search-bar::before {
+            content: "🔍";
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #e50914;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #b20710;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .watchlist {
+            position: relative;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #e50914;
+            transition: color 0.3s;
+        }
+
+        .watchlist:hover {
+            color: #b20710;
+        }
+
+        .watchlist-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: #e50914;
+            color: #fff;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e50914;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1);
+            border-color: #b20710;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background: #222;
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            min-width: 150px;
+            z-index: 10;
+            animation: slideDown 0.2s ease-in;
+        }
+
+        .profile:hover .profile-dropdown {
+            display: flex;
+        }
+
+        .profile-dropdown a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .profile-dropdown a:hover {
+            background: #e50914;
+            color: #000;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .profile-section {
+            max-width: 1200px;
+            margin: 100px auto 40px; /* Offset for fixed header */
+            padding: 0 20px;
+        }
+
+        .profile-section h2 {
+            font-size: 1.8rem;
+            color: #e50914;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .profile-card {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1);
+        }
+
+        .profile-details {
+            margin-bottom: 20px;
+        }
+
+        .profile-details p {
+            font-size: 1rem;
+            margin: 10px 0;
+            color: #ccc;
+        }
+
+        .profile-details .label {
+            font-weight: 600;
+            color: #e50914;
+        }
+
+        .profile-form {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .profile-form.active {
+            display: flex;
+        }
+
+        .profile-form label {
+            font-size: 0.9rem;
+            color: #e50914;
+            text-align: left;
+        }
+
+        .profile-form input {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .profile-form input:focus {
+            background: #444;
+        }
+
+        .watchlist-history {
+            margin-top: 20px;
+        }
+
+        .watchlist-history h3 {
+            font-size: 1.3rem;
+            color: #e50914;
+            margin-bottom: 15px;
+        }
+
+        .watchlist-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .watchlist-item:last-child {
+            border-bottom: none;
+        }
+
+        .watchlist-item p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .account-actions button {
+            background: #e50914;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .account-actions button:hover {
+            background: #b20710;
+        }
+
+        footer {
+            background: #222;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -4px 12px rgba(255, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #e50914;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #b20710;
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 10px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-right {
+                gap: 15px;
+            }
+
+            .profile-section {
+                margin: 80px auto 20px;
+            }
+
+            .profile-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .watchlist-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .watchlist-item p {
+                margin: 5px 0;
+            }
+
+            .account-actions {
+                flex-direction: column;
+            }
+
+            .account-actions button {
+                width: 100%;
+            }
+
+            footer a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+            /* Hamburger styles */
+.hamburger {
+    display: none; /* only show on small screens */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    height: 4px;
+    background-color: #e50914;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animate hamburger into X */
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive menu toggle */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    .nav-links,
+    .header-right,
+    .search-bar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #1c1c1c;
+        padding: 10px 0;
+        gap: 10px;
+    }
+    .nav-links a {
+        padding: 10px 20px;
+    }
+    .nav-links.active,
+    .header-right.active,
+    .search-bar.active {
+        display: flex;
+    }
+}
+
+    </style>
+</head>
+<body>
+  <header>
+
+  <div class="logo">🎥 CineStream</div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for Movies, Series and More">
+  </div>
+   <!-- Hamburger -->
+    <div class="hamburger" id="hamburgerBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="watch.html">Watch</a>
+    <a href="bookings.html">Bookings</a>
+  </div>
+  <div class="header-right" id="headerRight">
+    <div class="watchlist">
+      <a href="payments.html">💸 <span class="watchlist-count">0</span></a>
+    </div>
+    <div class="profile">
+      <img src="profile.gif" alt="Profile" class="profile-img">
+      <div class="profile-dropdown" id="profileDropdown"></div>
+    </div>
+  </div>
+  </header>
+
+  <section class="profile-section">
+    <h2>My Profile</h2>
+    <div class="profile-card">
+      <div class="profile-details" id="profileDetails">
+        <p><span class="label">Name:</span> <span id="userName"></span></p>
+        <p><span class="label">Email:</span> <span id="userEmail"></span></p>
+        <p><span class="label">Member Since:</span> <span id="userMemberSince"></span></p>
+      </div>
+      <form class="profile-form" id="editProfileForm" onsubmit="updateProfile(event)">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <div class="account-actions">
+          <button type="submit">Save Changes</button>
+          <button type="button" onclick="toggleEditForm()">Cancel</button>
+        </div>
+      </form>
+      <form class="profile-form" id="changePasswordForm" onsubmit="changePassword(event)">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" name="currentPassword" required>
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+        <div class="account-actions">
+          <button type="submit">Change Password</button>
+          <button type="button" onclick="togglePasswordForm()">Cancel</button>
+        </div>
+      </form>
+      <div class="watchlist-history">
+        <a href="bookings.html"><h3>Bookings & Watchlist History</h3></a>
+        <div id="watchlistList"></div>
+      </div>
+      <div class="account-actions">
+        <button onclick="toggleEditForm()">Edit Profile</button>
+        <button onclick="togglePasswordForm()">Change Password</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="about.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <p>&copy; 2025 CineStream. All rights reserved.</p>
+  </footer>
+
+<script src="scriptprofile.js"></script>
+</body>
+</html>

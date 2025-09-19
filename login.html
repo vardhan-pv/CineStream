@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login - CineStream</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+    body {
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; position: relative;
+    }
+    body::before {
+      content: "";
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(0.7px) brightness(0.5);
+      z-index: -1;
+    }
+    .login-box { background: #222; padding: 2rem 2.5rem; border-radius: 30px; box-shadow: 0 8px 25px rgba(229,9,20,0.2); width: 420px; max-width: 90%; }
+    .login-box h2 { font-size: 1.8rem; color: #e50914; margin-bottom: 1.5rem; font-weight: 700; text-align: center; }
+    .input-group { position: relative; margin-bottom: 1rem; }
+    .input-group input { width: 100%; padding: 0.9rem 2.5rem 0.9rem 1rem; border-radius: 8px; border: 1px solid #ccc; outline: none; background: #333; color: #fff; transition: 0.3s; }
+    .input-group input:focus { border-color: #e50914; box-shadow: 0 0 6px rgba(229,9,20,0.4); }
+    .input-group .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #ccc; }
+    .btn { width: 100%; padding: 0.9rem; background: #e50914; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; }
+    .btn:hover { background: #b20710; box-shadow: 0 0 12px rgba(229,9,20,0.5); }
+    .extra { margin-top: 0.8rem; font-size: 0.85rem; color: #ccc; text-align: center; }
+    .extra a { text-decoration: none; color: #e50914; font-weight: 500; }
+    .extra a:hover { color: #b20710; text-decoration: underline; }
+    .error-message { color: #e50914; font-size: 0.85rem; margin-top: 0.5rem; display: none; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Welcome to CineStream</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email" required>
+        <span class="icon">📧</span>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="icon">🔒</span>
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p class="extra">Don't have an account? <a href="signup.html">Signup</a></p>
+      <p class="extra"><a href="admin.html">Admin Login</a></p>
+      <p class="error-message" id="errorMessage"></p>
+    </form>
+  </div>
+
+   <script>
+       document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  // ================= Validation =================
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address!");
+    return;
+  }
+
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters long!");
+    return;
+  }
+
+  // ================= Fetch Users =================
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // ================= Find User =================
+  const user = users.find((u) => u.email === email && u.password === password);
+
+  if (user) {
+    // Save logged-in user
+    const currentUser = {
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phone: user.phone || user.number || "",
+    };
+
+    localStorage.setItem("currentUser", JSON.stringify(currentUser)); // Persist login across pages
+    sessionStorage.setItem("loggedInUserEmail", user.email); // Session check
+
+    alert(`Welcome ${user.firstName}!`);
+    window.location.href = "index.html"; // Redirect to homepage
+  } else {
+    alert("Invalid email or password!");
+  }
+});
+
+
+    </script>
+
+
+</body>
+</html>

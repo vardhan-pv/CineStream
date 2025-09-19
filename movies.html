@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - Movies</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="stylemovies.css">
+</head>
+<body>
+  <header>
+
+  <div class="logo">🎥 CineStream</div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for Movies, Series and More">
+  </div>
+   <!-- Hamburger -->
+    <div class="hamburger" id="hamburgerBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="watch.html">Watch</a>
+    <a href="bookings.html">Bookings</a>
+  </div>
+  <div class="header-right" id="headerRight">
+    <div class="watchlist">
+      <a href="payments.html">💸 <span class="watchlist-count">0</span></a>
+    </div>
+    <div class="profile">
+      <img src="profile.gif" alt="Profile" class="profile-img">
+      <div class="profile-dropdown" id="profileDropdown"></div>
+    </div>
+  </div>
+  </header>
+    <section class="movies">
+        <h2>Now Showing</h2>
+        <div class="content-grid">
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+        </div>
+        <div class="content-grid">
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="1.png" alt="QUANTUM AIVIDE">
+                <h3>QUANTUM AIVIDE</h3>
+                <div class="price">Ticket: ₹250</div>
+                <div class="reviews">⭐⭐⭐⭐ (120 reviews)</div>
+                <button onclick="bookAndPay('m1', 'QUANTUM AIVIDE', 250, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="3.png" alt="THE MIDNIGHT ALLY">
+                <h3>THE MIDNIGHT ALLY</h3>
+                <div class="price">Ticket: ₹200</div>
+                <div class="reviews">⭐⭐⭐⭐ (180 reviews)</div>
+                <button onclick="bookAndPay('m2', 'THE MIDNIGHT ALLY', 200, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="5.png" alt="LOVE AT FIRST BYTE">
+                <h3>LOVE AT FIRST BYTE</h3>
+                <div class="price">Ticket: ₹300</div>
+                <div class="reviews">⭐⭐⭐⭐ (150 reviews)</div>
+                <button onclick="bookAndPay('m3', 'LOVE AT FIRST BYTE', 300, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="7.png" alt="THE WHISPERING WOODS">
+                <h3>THE WHISPERING WOODS</h3>
+                <div class="price">Ticket: ₹280</div>
+                <div class="reviews">⭐⭐⭐⭐ (200 reviews)</div>
+                <button onclick="bookAndPay('m4', 'THE WHISPERING WOODS', 280, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="9.png" alt="CRIMSON TIDE">
+                <h3>CRIMSON TIDE</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m5', 'CRIMSON TIDE', 270, 'movie')">Book and Pay</button>
+            </div>
+            <div class="content-card">
+                <img src="11.png" alt="THE WHISPERING LABYRINTH">
+                <h3>THE WHISPERING LABYRINTH</h3>
+                <div class="price">Ticket: ₹270</div>
+                <div class="reviews">⭐⭐⭐⭐ (170 reviews)</div>
+                <button onclick="bookAndPay('m6', 'THE WHISPERING LABYRINTH', 270, 'movie')">Book and Pay</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+        </div>
+        <p>&copy; 2025 CineStream. All rights reserved.</p>
+    </footer>
+
+    <script src="scriptmovies.js"></script>
+
+</body>
+</html>
