@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineStream - My Bookings & Watchlist</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #1c1c1c;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("bg.png") no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(0.7px) brightness(0.5);
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+            background: linear-gradient(90deg, #000, #2a0000);
+            box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e50914;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .search-bar {
+            position: relative;
+            max-width: 300px;
+            flex-grow: 0.5;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border: none;
+            border-radius: 25px;
+            background: #333;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .search-bar input:focus {
+            background: #444;
+        }
+
+        .search-bar::before {
+            content: "🔍";
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #e50914;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #b20710;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .watchlist {
+            position: relative;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #e50914;
+            transition: color 0.3s;
+        }
+
+        .watchlist:hover {
+            color: #b20710;
+        }
+
+        .watchlist-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: #e50914;
+            color: #fff;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #e50914;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.1);
+            border-color: #b20710;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background: #222;
+            box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            min-width: 150px;
+            z-index: 10;
+            animation: slideDown 0.2s ease-in;
+        }
+
+        .profile:hover .profile-dropdown {
+            display: flex;
+        }
+
+        .profile-dropdown a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .profile-dropdown a:hover {
+            background: #e50914;
+            color: #000;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .bookings-section {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .bookings-section h2 {
+            font-size: 1.8rem;
+            color: #e50914;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .bookings-list {
+            background: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1);
+        }
+
+        .booking-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            position: relative;
+        }
+
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+
+        .booking-item h3 {
+            font-size: 1.3rem;
+            color: #e50914;
+            margin-bottom: 10px;
+        }
+
+        .booking-item p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin: 5px 0;
+        }
+
+        .booking-item .status-booked {
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .booking-item .status-confirmed {
+            color: #e50914;
+            font-weight: 600;
+        }
+
+        .booking-item .qr-code {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+
+        .booking-item .delete-button {
+            background: #e50914;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .booking-item .delete-button:hover {
+            background: #b20710;
+        }
+
+        .empty-bookings {
+            text-align: center;
+            font-size: 1rem;
+            color: #ccc;
+            padding: 20px;
+        }
+
+        footer {
+            background: #222;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -4px 12px rgba(255, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .footer-links {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #e50914;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: #b20710;
+            text-decoration: underline;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+                gap: 10px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-right {
+                gap: 15px;
+            }
+
+            .bookings-section {
+                margin: 80px auto 20px;
+            }
+
+            .bookings-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .bookings-list {
+                padding: 15px;
+            }
+
+            .booking-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .booking-item .delete-button {
+                position: static;
+                margin-top: 10px;
+                width: 100%;
+                text-align: center;
+            }
+
+            footer a {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+            /* Hamburger styles */
+.hamburger {
+    display: none; /* only show on small screens */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    height: 4px;
+    background-color: #e50914;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animate hamburger into X */
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive menu toggle */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    .nav-links,
+    .header-right,
+    .search-bar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #1c1c1c;
+        padding: 10px 0;
+        gap: 10px;
+    }
+    .nav-links a {
+        padding: 10px 20px;
+    }
+    .nav-links.active,
+    .header-right.active,
+    .search-bar.active {
+        display: flex;
+    }
+}
+
+    </style>
+</head>
+<body>
+  <header>
+
+  <div class="logo">🎥 CineStream</div>
+  
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for Movies, Series and More">
+  </div>
+   <!-- Hamburger -->
+    <div class="hamburger" id="hamburgerBtn">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="watch.html">Watch</a>
+    <a href="bookings.html">Bookings</a>
+  </div>
+  <div class="header-right" id="headerRight">
+    <div class="watchlist">
+      <a href="payments.html">💸 <span class="watchlist-count">0</span></a>
+    </div>
+    <div class="profile">
+      <img src="profile.gif" alt="Profile" class="profile-img">
+      <div class="profile-dropdown" id="profileDropdown"></div>
+    </div>
+  </div>
+  </header>
+  <section class="bookings-section">
+    <h2>Your Bookings & Watchlist</h2>
+    <div class="bookings-list" id="bookingsList"></div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <p>&copy; 2025 CineStream. All rights reserved.</p>
+  </footer>
+
+  <script>
+ // Ensure user is logged in
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if (!currentUser) {
+    alert("Please login to view your bookings.");
+    window.location.href = "login.html";
+}
+
+// Profile dropdown content
+const profileDropdown = document.getElementById("profileDropdown");
+profileDropdown.innerHTML = `
+  <a href="profile.html">My Account</a>
+  <a href="bookings.html">My Bookings</a>
+  <a href="logout.html" onclick="logout()">Logout</a>
+`;
+
+// Load bookings
+let bookings = JSON.parse(localStorage.getItem(`bookings_${currentUser.email}`)) || [];
+
+// Render bookings
+function renderBookings(searchTerm = '') {
+    const bookingsListContainer = document.getElementById('bookingsList');
+    bookingsListContainer.innerHTML = '';
+
+    const filteredBookings = bookings.filter(item => {
+        const name = item.name.toLowerCase();
+        const type = item.type.toLowerCase();
+        return name.includes(searchTerm.toLowerCase()) || type.includes(searchTerm.toLowerCase());
+    });
+
+    if (filteredBookings.length === 0) {
+        bookingsListContainer.innerHTML = '<p class="empty-bookings">You have no bookings or watchlist items.</p>';
+        return;
+    }
+
+    filteredBookings.forEach((item, index) => {
+        const bookingItem = document.createElement('div');
+        bookingItem.className = 'booking-item';
+        const statusClass = item.status === 'Pending' ? 'status-booked' : 'status-confirmed';
+        const qrCode = item.ticketId ? `[QR Code: TICKET-${item.ticketId}]` : '[No QR Code]';
+
+        bookingItem.innerHTML = `
+          <h3>${item.type === 'movie' ? 'Movie Ticket' : 'Web Series'}: ${item.name}</h3>
+          ${item.ticketId ? `<p><strong>Ticket ID:</strong> ${item.ticketId}</p>` : ''}
+          <p><strong>Price:</strong> ${item.price === 0 ? 'Free' : '₹' + item.price}</p>
+          <p><strong>Quantity:</strong> ${item.quantity}</p>
+          <p><strong>Date:</strong> ${item.date || 'Today'}</p>
+          <p><strong>Status:</strong> <span class="${statusClass}">${item.status || 'Pending'}</span></p>
+          ${item.ticketId ? `<p class="qr-code">${qrCode}</p>` : ''}
+          ${item.deliveryDetails ? `
+            <p><strong>Booked By:</strong> ${item.deliveryDetails.name}</p>
+            <p><strong>Theater:</strong> ${item.deliveryDetails.address}</p>
+            <p><strong>Phone:</strong> ${item.deliveryDetails.phone}</p>
+          ` : ''}
+          <button class="delete-button" onclick="deleteBooking(${index})">Remove</button>
+        `;
+        bookingsListContainer.appendChild(bookingItem);
+    });
+
+    updateWatchlistCount();
+}
+
+// Delete booking
+function deleteBooking(index) {
+    if (confirm('Are you sure you want to remove this item?')) {
+        bookings.splice(index, 1);
+        localStorage.setItem(`bookings_${currentUser.email}`, JSON.stringify(bookings));
+        renderBookings();
+        alert('Item removed successfully!');
+    }
+}
+
+// Update watchlist count
+function updateWatchlistCount() {
+    const bookings = JSON.parse(localStorage.getItem(`bookings_${currentUser.email}`)) || [];
+    const watchlistCount = bookings.reduce((total, item) => total + item.quantity, 0);
+    document.querySelector('.watchlist-count').textContent = watchlistCount;
+}
+
+// Logout
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+}
+
+// Profile dropdown toggle
+const profile = document.querySelector('.profile');
+const dropdown = document.querySelector('.profile-dropdown');
+profile.addEventListener('click', () => {
+    dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+});
+document.addEventListener('click', (e) => {
+    if (!profile.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
+// Search inside bookings page
+document.getElementById('searchInput').addEventListener('input', function (e) {
+    renderBookings(e.target.value.trim());
+});
+
+// Hamburger menu
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const navLinks = document.getElementById('navLinks');
+const headerRight = document.getElementById('headerRight');
+const searchBar = document.querySelector('.search-bar');
+
+hamburgerBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    navLinks.classList.toggle('active');
+    headerRight.classList.toggle('active');
+    searchBar.classList.toggle('active');
+    hamburgerBtn.classList.toggle('active'); // animate to X
+});
+document.addEventListener('click', function(e) {
+    if (!navLinks.contains(e.target) && !headerRight.contains(e.target) && !hamburgerBtn.contains(e.target) && !searchBar.contains(e.target)) {
+        navLinks.classList.remove('active');
+        headerRight.classList.remove('active');
+        searchBar.classList.remove('active');
+        hamburgerBtn.classList.remove('active');
+    }
+});
+
+// Run on load
+document.addEventListener('DOMContentLoaded', () => renderBookings());
+
+  </script>
+</body>
+</html>

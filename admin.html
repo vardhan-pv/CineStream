@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - CineStream</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+
+    body {
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("bg.png") no-repeat center center fixed;
+      background-size: cover;
+      filter: blur(0.7px);
+      z-index: -1;
+    }
+
+    .login-container { text-align: center; }
+
+    .logo { font-size: 4rem; color: #e50914; font-weight: 700; margin-bottom: 1rem; }
+
+    .login-box {
+      background: #222;
+      padding: 2rem 2.5rem;
+      border-radius: 30px;
+      box-shadow: 0 8px 25px rgba(229, 9, 20, 0.15);
+      width: 420px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .login-box h2 { font-size: 1.8rem; color: #e50914; margin-bottom: 1.5rem; font-weight: 700; }
+
+    .input-group { position: relative; margin-bottom: 1rem; }
+
+    .input-group input {
+      width: 100%; padding: 0.9rem 2.5rem 0.9rem 1rem;
+      border-radius: 8px; border: 1px solid #ccc; outline: none;
+      background: #333; color: #fff;
+    }
+    .input-group input:focus { border-color: #e50914; box-shadow: 0 0 6px rgba(229, 9, 20, 0.4); }
+    .input-group .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #ccc; }
+
+    .btn {
+      width: 100%; padding: 0.9rem;
+      background: #e50914; color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background 0.3s, box-shadow 0.3s;
+    }
+    .btn:hover { background: #b20710; box-shadow: 0 0 12px rgba(229, 9, 20, 0.5); }
+
+    .extra { margin-top: 0.8rem; font-size: 0.85rem; color: #ccc; }
+    .extra a { text-decoration: none; color: #e50914; font-weight: 500; }
+    .extra a:hover { color: #b20710; }
+
+    .error-message { color: #e50914; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="login-container">
+      <div class="logo">🎥</div>
+      <h2>Admin Login</h2>
+      <form id="adminForm">
+        <div class="input-group">
+          <input type="email" id="adminEmail" placeholder="Email" required>
+          <span class="icon">📧</span>
+        </div>
+        <div class="input-group">
+          <input type="password" id="adminPassword" placeholder="Password" required>
+          <span class="icon">🔒</span>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p class="extra"><a href="signup.html">Back to Signup</a></p>
+        <p class="extra"><a href="login.html">User Login</a></p>
+        <p class="error-message" id="errorMessage"></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+       // ================= Admin Credentials =================
+// ⚠️ Demo only — in real apps, validate via a secure backend (NOT client-side!)
+const adminCredentials = [
+  { email: "pvvardhanreddy28@gmail.com", password: "var123" },
+  { email: "vinayaka123@email.com", password: "vin123" },
+];
+
+// ================= Admin Login =================
+document.getElementById("adminForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address!");
+    return;
+  }
+
+  // Password validation
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters long!");
+    return;
+  }
+
+  // Match credentials
+  const admin = adminCredentials.find(
+    (cred) => cred.email === email && cred.password === password
+  );
+
+  if (admin) {
+    sessionStorage.setItem("adminLoggedIn", "true"); // session-only login
+    sessionStorage.setItem("adminEmail", email); // store which admin logged in
+    alert("✅ Admin login successful!");
+    window.location.href = "users.html"; // redirect to user management page
+  } else {
+    alert("❌ Invalid admin credentials!");
+  }
+});
+
+    </script>
+</body>
+</html>
